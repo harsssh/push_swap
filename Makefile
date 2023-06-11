@@ -5,10 +5,10 @@ LIBFT:=libft/libft.a
 SRC_DIR=src
 BUILD_DIR:=build
 
-CFLAGS:=-Wall -Wextra -Werror -Ilibft
+CFLAGS:=-Wall -Wextra -Werror -Ilibft -Iinclude
 DEPFLAGS=-MT $@ -MMD -MP -MF $(BUILD_DIR)/$*.d
 
-SRC:=$(wildcard src/*.c)
+SRC:=$(wildcard src/*.c) $(wildcard src/**/*.c)
 OBJ:=$(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC))
 DEP:=$(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.d,$(SRC))
 
@@ -18,11 +18,9 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) -Llibft -lft -o $@ $(OBJ)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(DEPFLAGS) $(INCLUDE) -c -o $@ $<
-
-$(BUILD_DIR):
-	@mkdir -p $@
 
 $(LIBFT):
 	make -C libft
