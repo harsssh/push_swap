@@ -1,0 +1,8 @@
+a.out
+*.o
+*.d
+push_swap
+compile_commands.json
+build
+.idea
+.cache
