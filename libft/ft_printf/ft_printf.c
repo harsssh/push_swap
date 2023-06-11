@@ -13,7 +13,6 @@
 #include "internal.h"
 #include "libft.h"
 #include <stdarg.h>
-#include <stdint.h>
 #include <stdio.h>
 #include <unistd.h>
 

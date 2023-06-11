@@ -33,9 +33,9 @@ static int	is_overflow(int sign, unsigned long num, unsigned long x)
 	unsigned long	limit;
 
 	if (sign == 1)
-		limit = LONG_MAX;
+		limit = LLONG_MAX;
 	else
-		limit = -LONG_MIN;
+		limit = -LLONG_MIN;
 	return (limit / 10 < num || limit - num * 10 < x);
 }
 
@@ -53,8 +53,8 @@ long	ft_atol(const char *str)
 		if (is_overflow(sign, num, x))
 		{
 			if (sign == 1)
-				return ((int)LONG_MAX);
-			return ((int)LONG_MIN);
+				return ((int)LLONG_MAX);
+			return ((int)LLONG_MIN);
 		}
 		num = num * 10 + x;
 	}

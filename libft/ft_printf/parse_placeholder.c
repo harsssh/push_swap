@@ -13,7 +13,6 @@
 #include "internal.h"
 #include "libft.h"
 #include <stdbool.h>
-#include <stdio.h>
 
 static char	*parse_flags(t_placeholder *p, const char *s)
 {
@@ -44,7 +43,7 @@ static char	*parse_width(t_placeholder *p, const char *s)
 
 static char	*parse_precision(t_placeholder *p, const char *s)
 {
-	if (*s == '\0' || *s != '.')
+	if (*s != '.')
 		return ((char *)s);
 	s++;
 	p->exist_precision = ft_isdigit(*s);

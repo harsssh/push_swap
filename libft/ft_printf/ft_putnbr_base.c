@@ -12,7 +12,6 @@
 
 #include "internal.h"
 #include "libft.h"
-#include <stddef.h>
 #include <unistd.h>
 
 size_t	ft_putunbr_base(unsigned long long nbr, char *base)

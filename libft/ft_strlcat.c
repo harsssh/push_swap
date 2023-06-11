@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
 
 static size_t	ft_strnlen(const char *s, size_t maxlen)
 {

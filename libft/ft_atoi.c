@@ -13,11 +13,6 @@
 #include "libft.h"
 #include <limits.h>
 
-static int	ft_isspace(int c)
-{
-	return (('\t' <= c && c <= '\r') || c == ' ');
-}
-
 static int	read_up_to_sign(const char **s)
 {
 	while (**s && ft_isspace(**s))
