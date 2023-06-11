@@ -39,7 +39,7 @@ static int	is_overflow(int sign, unsigned long num, unsigned long x)
 	return (limit / 10 < num || limit - num * 10 < x);
 }
 
-long	ft_atol(const char *str)
+long long	ft_atoll(const char *str)
 {
 	int				sign;
 	unsigned long	num;
