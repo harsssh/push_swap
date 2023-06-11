@@ -6,14 +6,14 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 15:55:14 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/11 17:45:10 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/11 23:41:37 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parse_args.h"
+#include <limits.h>
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -43,9 +43,34 @@ static bool	is_number(char *s)
 
 static int	parse_single_arg(char *arg)
 {
+	long long	num;
+
 	if (!is_number(arg))
 		exit_with_message();
-	return (ft_atoi(arg));
+	num = ft_atoll(arg);
+	if (num < INT_MIN || num > INT_MAX)
+		exit_with_message();
+	return ((int)num);
+}
+
+static bool	has_duplicate(const int *array, size_t size)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if (array[i] == array[j])
+				return (true);
+			j++;
+		}
+		i++;
+	}
+	return (false);
 }
 
 int	*parse_args(int argc, char **argv)
@@ -64,5 +89,7 @@ int	*parse_args(int argc, char **argv)
 		buf[i] = parse_single_arg(argv[i + 1]);
 		i++;
 	}
+	if (has_duplicate(buf, argc - 1))
+		exit_with_message();
 	return (buf);
 }
