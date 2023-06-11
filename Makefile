@@ -21,8 +21,6 @@ $(NAME): $(LIBFT) $(OBJ)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(DEPFLAGS) $(INCLUDE) -c -o $@ $<
 
-$(DEP):
-
 $(BUILD_DIR):
 	@mkdir -p $@
 
