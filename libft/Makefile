@@ -1,18 +1,25 @@
 NAME:=libft.a
 
-CFLAGS:=-Wall -Wextra -Werror -I.
+SRC_DIR=src
+BUILD_DIR:=build
 
-SRC:=ft_atoi.c ft_atol.c ft_atoll.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_isspace.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strcmp.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
-SRC+=ft_printf/ft_printf.c ft_printf/ft_putnbr_base.c ft_printf/parse_placeholder.c ft_printf/print.c ft_printf/to_enum.c
-SRC+=get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+CFLAGS:=-Wall -Wextra -Werror -Iinclude
 
-OBJ:=$(SRC:.c=.o)
+SRC:=ctype/ft_isalnum.c ctype/ft_isalpha.c ctype/ft_isascii.c ctype/ft_isdigit.c ctype/ft_isprint.c ctype/ft_isspace.c ctype/ft_tolower.c ctype/ft_toupper.c \
+stdio/ft_printf/ft_printf.c stdio/ft_printf/ft_putnbr_base.c stdio/ft_printf/parse_placeholder.c stdio/ft_printf/print.c stdio/ft_printf/to_enum.c stdio/ft_putchar_fd.c stdio/ft_putendl_fd.c stdio/ft_putnbr_fd.c stdio/ft_putstr_fd.c stdio/get_next_line/get_next_line.c stdio/get_next_line/get_next_line_utils.c \
+stdlib/ft_atoi.c stdlib/ft_atol.c stdlib/ft_atoll.c stdlib/ft_calloc.c stdlib/ft_itoa.c \
+string/ft_memchr.c string/ft_memcmp.c string/ft_memcpy.c string/ft_memmove.c string/ft_memset.c string/ft_split.c string/ft_strchr.c string/ft_strcmp.c string/ft_strdup.c string/ft_striteri.c string/ft_strjoin.c string/ft_strlcat.c string/ft_strlcpy.c string/ft_strlen.c string/ft_strmapi.c string/ft_strncmp.c string/ft_strnlen.c string/ft_strnstr.c string/ft_strrchr.c string/ft_strtrim.c string/ft_substr.c strings/ft_bzero.c
+OBJ:=$(addprefix $(BUILD_DIR)/,$(SRC:.c=.o))
 
 .PHONY: all
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $@ $^
+
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 .PHONY: clean
 clean:

@@ -4,3 +4,4 @@ libft.a
 *.o
 build
 .idea
+cmake-build-debug
