@@ -4,7 +4,7 @@ project(push_swap C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror")
 
-include_directories(include libft)
+include_directories(libft src)
 
 file(GLOB LIBFT libft/*.c libft/**/*.c)
 file(GLOB SOURCES src/*.c src/**/*.c)
