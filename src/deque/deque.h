@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:02:43 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/13 14:12:49 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:48:44 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void					deque_push_front(t_deque *deque, int value);
 void					deque_push_back(t_deque *deque, int value);
 int						deque_pop_front(t_deque *deque);
 int						deque_pop_back(t_deque *deque);
+int						deque_at(t_deque *deque, int index);
 
 #endif

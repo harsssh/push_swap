@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:03:05 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/13 14:12:47 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:51:09 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,22 @@ void	deque_destroy(t_deque *deque)
 {
 	free(deque->data);
 	free(deque);
+}
+
+size_t	deque_size(t_deque *deque)
+{
+	if (deque->is_empty)
+		return (0);
+	if (deque->begin < deque->end)
+		return (deque->end - deque->begin);
+	else
+		return (deque->capacity - deque->begin + deque->end);
+}
+
+int	deque_at(t_deque *deque, int index)
+{
+	unsigned int	i;
+
+	i = (deque->begin + index + deque->capacity) % deque->capacity;
+	return (deque->data[i]);
 }

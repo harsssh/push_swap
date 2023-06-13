@@ -6,21 +6,11 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:03:23 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/13 14:12:55 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:49:56 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "deque.h"
-
-size_t	deque_size(t_deque *deque)
-{
-	if (deque->is_empty)
-		return (0);
-	if (deque->begin < deque->end)
-		return (deque->end - deque->begin);
-	else
-		return (deque->capacity - deque->begin + deque->end);
-}
 
 void	deque_push_front(t_deque *deque, int value)
 {
