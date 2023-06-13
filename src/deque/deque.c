@@ -6,14 +6,14 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:03:05 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/12 01:38:28 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:12:47 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "deque.h"
 #include <stdlib.h>
 
-t_deque	*new_deque(size_t capacity)
+t_deque	*deque_init(size_t capacity)
 {
 	t_deque	*stack;
 
@@ -33,7 +33,7 @@ t_deque	*new_deque(size_t capacity)
 	return (stack);
 }
 
-void	free_deque(t_deque *deque)
+void	deque_destroy(t_deque *deque)
 {
 	free(deque->data);
 	free(deque);

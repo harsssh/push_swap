@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:02:43 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/12 01:37:54 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:12:49 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ struct					s_deque
 };
 typedef struct s_deque	t_deque;
 
-t_deque					*new_deque(size_t capacity);
-void					free_deque(t_deque *deque);
+t_deque					*deque_init(size_t capacity);
+void					deque_destroy(t_deque *deque);
 size_t					deque_size(t_deque *deque);
 void					deque_push_front(t_deque *deque, int value);
 void					deque_push_back(t_deque *deque, int value);
