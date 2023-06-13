@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "two_stack.h"
+#include "stacks.h"
 #include <unistd.h>
 
 static void	rotate_impl(t_deque *deque)
@@ -25,22 +25,22 @@ static void	rotate_impl(t_deque *deque)
 }
 
 // rotate stack a (the first element becomes the last one)
-void	two_stack_ra(t_two_stack *two_stack)
+void	stacks_ra(t_stacks *stacks)
 {
 	ft_putstr_fd("ra\n", STDOUT_FILENO);
-	rotate_impl(two_stack->a);
+	rotate_impl(stacks->a);
 }
 
 // rotate stack b (the first element becomes the last one)
-void	two_stack_rb(t_two_stack *two_stack)
+void	stacks_rb(t_stacks *stacks)
 {
 	ft_putstr_fd("rb\n", STDOUT_FILENO);
-	rotate_impl(two_stack->b);
+	rotate_impl(stacks->b);
 }
 
-void	two_stack_rr(t_two_stack *two_stack)
+void	stacks_rr(t_stacks *stacks)
 {
 	ft_putstr_fd("rr\n", STDOUT_FILENO);
-	rotate_impl(two_stack->a);
-	rotate_impl(two_stack->b);
+	rotate_impl(stacks->a);
+	rotate_impl(stacks->b);
 }

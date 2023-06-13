@@ -11,23 +11,23 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "two_stack.h"
+#include "stacks.h"
 #include <unistd.h>
 
 // push the top of stack b to stack a
-void	two_stack_pa(t_two_stack *two_stack)
+void	stacks_pa(t_stacks *stacks)
 {
 	ft_putstr_fd("pa\n", STDOUT_FILENO);
-	if (two_stack->b->is_empty)
+	if (stacks->b->is_empty)
 		return ;
-	deque_push_back(two_stack->a, deque_pop_back(two_stack->b));
+	deque_push_back(stacks->a, deque_pop_back(stacks->b));
 }
 
 // push the top of stack a to stack b
-void	two_stack_pb(t_two_stack *two_stack)
+void	stacks_pb(t_stacks *stacks)
 {
 	ft_putstr_fd("pb\n", STDOUT_FILENO);
-	if (two_stack->a->is_empty)
+	if (stacks->a->is_empty)
 		return ;
-	deque_push_back(two_stack->b, deque_pop_back(two_stack->a));
+	deque_push_back(stacks->b, deque_pop_back(stacks->a));
 }

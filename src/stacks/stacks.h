@@ -1,48 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   two_stack.h                                        :+:      :+:    :+:   */
+/*   stacks.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 15:18:36 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/13 15:18:37 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:11:09 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TWO_STACK_H
-# define TWO_STACK_H
+#ifndef STACKS_H
+# define STACKS_H
 
 # include "deque/deque.h"
 
-struct						s_two_stack
+struct					s_stacks
 {
-	t_deque					*a;
-	t_deque					*b;
+	t_deque				*a;
+	t_deque				*b;
 };
-typedef struct s_two_stack	t_two_stack;
+typedef struct s_stacks	t_stacks;
 
 // swap two elements at the top of stack a
-void						two_stack_sa(t_two_stack *two_stack);
+void					stacks_sa(t_stacks *stacks);
 // swap two elements at the top of stack b
-void						two_stack_sb(t_two_stack *two_stack);
-void						two_stack_ss(t_two_stack *two_stack);
+void					stacks_sb(t_stacks *stacks);
+void					stacks_ss(t_stacks *stacks);
 
 // push the top of stack b to stack a
-void						two_stack_pa(t_two_stack *two_stack);
+void					stacks_pa(t_stacks *stacks);
 // push the top of stack a to stack b
-void						two_stack_pb(t_two_stack *two_stack);
+void					stacks_pb(t_stacks *stacks);
 
 // rotate stack a (the first element becomes the last one)
-void						two_stack_ra(t_two_stack *two_stack);
+void					stacks_ra(t_stacks *stacks);
 // rotate stack b (the first element becomes the last one)
-void						two_stack_rb(t_two_stack *two_stack);
-void						two_stack_rr(t_two_stack *two_stack);
+void					stacks_rb(t_stacks *stacks);
+void					stacks_rr(t_stacks *stacks);
 
 // reverse rotate stack a
-void						two_stack_rra(t_two_stack *two_stack);
+void					stacks_rra(t_stacks *stacks);
 // reverse rotate stack b
-void						two_stack_rrb(t_two_stack *two_stack);
-void						two_stack_rrr(t_two_stack *two_stack);
+void					stacks_rrb(t_stacks *stacks);
+void					stacks_rrr(t_stacks *stacks);
 
 #endif

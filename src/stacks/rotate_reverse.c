@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "two_stack.h"
+#include "stacks.h"
 #include <unistd.h>
 
 static void	rotate_reverse_impl(t_deque *deque)
@@ -25,22 +25,22 @@ static void	rotate_reverse_impl(t_deque *deque)
 }
 
 // reverse rotate stack a
-void	two_stack_rra(t_two_stack *two_stack)
+void	stacks_rra(t_stacks *stacks)
 {
 	ft_putstr_fd("rra\n", STDOUT_FILENO);
-	rotate_reverse_impl(two_stack->a);
+	rotate_reverse_impl(stacks->a);
 }
 
 // reverse rotate stack b
-void	two_stack_rrb(t_two_stack *two_stack)
+void	stacks_rrb(t_stacks *stacks)
 {
 	ft_putstr_fd("rrb\n", STDOUT_FILENO);
-	rotate_reverse_impl(two_stack->b);
+	rotate_reverse_impl(stacks->b);
 }
 
-void	two_stack_rrr(t_two_stack *two_stack)
+void	stacks_rrr(t_stacks *stacks)
 {
 	ft_putstr_fd("rrr\n", STDOUT_FILENO);
-	rotate_reverse_impl(two_stack->a);
-	rotate_reverse_impl(two_stack->b);
+	rotate_reverse_impl(stacks->a);
+	rotate_reverse_impl(stacks->b);
 }

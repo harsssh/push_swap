@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "two_stack.h"
+#include "stacks.h"
 #include <unistd.h>
 
 static void	swap_impl(t_deque *deque)
@@ -28,22 +28,22 @@ static void	swap_impl(t_deque *deque)
 }
 
 // swap two elements at the top of stack a
-void	two_stack_sa(t_two_stack *two_stack)
+void	stacks_sa(t_stacks *stacks)
 {
 	ft_putstr_fd("sa\n", STDOUT_FILENO);
-	swap_impl(two_stack->a);
+	swap_impl(stacks->a);
 }
 
 // swap two elements at the top of stack b
-void	two_stack_sb(t_two_stack *two_stack)
+void	stacks_sb(t_stacks *stacks)
 {
 	ft_putstr_fd("sb\n", STDOUT_FILENO);
-	swap_impl(two_stack->b);
+	swap_impl(stacks->b);
 }
 
-void	two_stack_ss(t_two_stack *two_stack)
+void	stacks_ss(t_stacks *stacks)
 {
 	ft_putstr_fd("ss\n", STDOUT_FILENO);
-	swap_impl(two_stack->a);
-	swap_impl(two_stack->b);
+	swap_impl(stacks->a);
+	swap_impl(stacks->b);
 }
