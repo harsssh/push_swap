@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 15:55:14 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/11 23:41:37 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:53:24 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,28 @@ static void	exit_with_message(void)
 	exit(1);
 }
 
+// without positive sign, multiple negative signes, and leading zeros
+// "-0" is not allowed
 static bool	is_number(char *s)
 {
 	size_t	i;
 
-	if (s == NULL || *s == '\0')
+	if (s == NULL || s[0] == '\0')
 		return (false);
 	i = 0;
+	if (s[0] == '-')
+	{
+		if (s[1] == '\0' || s[1] == '0')
+			return (false);
+		i++;
+	}
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
 			return (false);
 		i++;
 	}
-	if (i > 1 && *s == '0')
+	if (s[0] != '-' && i > 1 && s[0] == '0')
 		return (false);
 	return (true);
 }
