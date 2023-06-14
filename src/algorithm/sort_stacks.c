@@ -6,13 +6,28 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 01:11:24 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 02:00:58 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
 #include <libc.h>
+#include <stdbool.h>
 #include <stdlib.h>
+
+static bool	is_sorted(t_stacks *stacks, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n - 1)
+	{
+		if (deque_at_back(stacks->a, i) > deque_at_back(stacks->a, i + 1))
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 static int	get_pivot(t_stacks *stack, size_t n)
 {
@@ -32,6 +47,12 @@ static int	get_pivot(t_stacks *stack, size_t n)
 	pivot = quick_select(array, n, n / 2);
 	free(array);
 	return (pivot);
+}
+
+static void	revert_separation(t_stacks *stacks, size_t n)
+{
+	while (n--)
+		stacks_pa(stacks);
 }
 
 static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
@@ -62,12 +83,6 @@ static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
 	return (remain);
 }
 
-static void	revert_separation(t_stacks *stacks, size_t n)
-{
-	while (n--)
-		stacks_pa(stacks);
-}
-
 void	sort_stacks(t_stacks *stacks, size_t n)
 {
 	size_t	remain;
@@ -80,6 +95,8 @@ void	sort_stacks(t_stacks *stacks, size_t n)
 			stacks_sa(stacks);
 		return ;
 	}
+	if (is_sorted(stacks, n))
+		return ;
 	remain = separate_by_pivot(stacks, n, get_pivot(stacks, n));
 	sort_stacks(stacks, remain);
 	revert_separation(stacks, n - remain);

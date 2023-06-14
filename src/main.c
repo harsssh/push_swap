@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:02:29 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/14 12:09:33 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 02:02:06 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int	main(int argc, char **argv)
 		return (1);
 	fill_deque(a, args, argc - 1);
 	free(args);
-	stacks.a = a;
-	stacks.b = b;
+	stacks_init(&stacks, a, b);
 	sort_stacks(&stacks, argc - 1);
 	deque_destroy(a);
 	deque_destroy(b);
