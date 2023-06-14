@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   add_instruction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/15 03:36:19 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 03:36:20 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/06/15 03:37:34 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/06/15 03:37:35 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "error/error.h"
 #include "libft.h"
+#include "stacks.h"
 #include <stdlib.h>
-#include <unistd.h>
 
-void	exit_with_message(void)
+void	stacks_add_instruction(t_stacks *stacks, const char *inst)
 {
-	ft_putstr_fd(ERR_MSG, STDERR_FILENO);
-	exit(1);
+	char	*tmp;
+
+	tmp = stacks->instructions;
+	stacks->instructions = ft_strjoin(stacks->instructions, inst);
+	free(tmp);
+	if (stacks->instructions == NULL)
+		exit_with_message();
 }

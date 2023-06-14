@@ -6,15 +6,15 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 02:00:58 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 03:36:48 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
+#include "error/error.h"
 #include <libc.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "error/error.h"
 
 static bool	is_sorted(t_stacks *stacks, size_t n)
 {
@@ -38,7 +38,7 @@ static int	get_pivot(t_stacks *stack, size_t n)
 
 	array = malloc(sizeof(int) * n);
 	if (!array)
-        exit_with_message();
+		exit_with_message();
 	i = 0;
 	while (i < n)
 	{

@@ -6,13 +6,11 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 15:18:33 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/13 15:18:34 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 03:37:27 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "stacks.h"
-#include <unistd.h>
 
 static void	swap_impl(t_deque *deque)
 {
@@ -30,20 +28,20 @@ static void	swap_impl(t_deque *deque)
 // swap two elements at the top of stack a
 void	stacks_sa(t_stacks *stacks)
 {
-	ft_putstr_fd("sa\n", STDOUT_FILENO);
+	stacks_add_instruction(stacks, INST_SA);
 	swap_impl(stacks->a);
 }
 
 // swap two elements at the top of stack b
 void	stacks_sb(t_stacks *stacks)
 {
-	ft_putstr_fd("sb\n", STDOUT_FILENO);
+	stacks_add_instruction(stacks, INST_SB);
 	swap_impl(stacks->b);
 }
 
 void	stacks_ss(t_stacks *stacks)
 {
-	ft_putstr_fd("ss\n", STDOUT_FILENO);
+	stacks_add_instruction(stacks, INST_SS);
 	swap_impl(stacks->a);
 	swap_impl(stacks->b);
 }
