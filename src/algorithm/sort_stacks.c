@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/14 20:51:29 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 01:11:24 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
-#include <stdbool.h>
+#include <libc.h>
+#include <stdlib.h>
 
-static int	get_pivot(t_stacks *stack)
+static int	get_pivot(t_stacks *stack, size_t n)
 {
-	int		top[3];
-	bool	diff[3];
+	size_t	i;
+	int		*array;
+	int		pivot;
 
-	top[0] = deque_at_back(stack->a, 0);
-	top[1] = deque_at_back(stack->a, 1);
-	top[2] = deque_at_back(stack->a, 2);
-	diff[0] = top[0] > top[1];
-	diff[1] = top[1] > top[2];
-	diff[2] = top[2] > top[0];
-	if (!(diff[0] ^ diff[1]))
-		return (top[1]);
-	else if (!(diff[1] ^ diff[2]))
-		return (top[2]);
-	else
-		return (top[0]);
+	array = malloc(sizeof(int) * n);
+	if (!array)
+		exit(1);
+	i = 0;
+	while (i < n)
+	{
+		array[i] = deque_at_back(stack->a, i);
+		i++;
+	}
+	pivot = quick_select(array, n, n / 2);
+	free(array);
+	return (pivot);
 }
 
 static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
@@ -40,7 +42,7 @@ static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
 	remain = 0;
 	while (n--)
 	{
-		if (deque_at_back(stacks->a, 0) <= pivot)
+		if (deque_at_back(stacks->a, 0) < pivot)
 			stacks_pb(stacks);
 		else
 		{
@@ -48,11 +50,14 @@ static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
 			remain++;
 		}
 	}
-	i = 0;
-	while (i < remain)
+	if (remain != deque_size(stacks->a))
 	{
-		stacks_rra(stacks);
-		i++;
+		i = 0;
+		while (i < remain)
+		{
+			stacks_rra(stacks);
+			i++;
+		}
 	}
 	return (remain);
 }
@@ -75,7 +80,7 @@ void	sort_stacks(t_stacks *stacks, size_t n)
 			stacks_sa(stacks);
 		return ;
 	}
-	remain = separate_by_pivot(stacks, n, get_pivot(stacks));
+	remain = separate_by_pivot(stacks, n, get_pivot(stacks, n));
 	sort_stacks(stacks, remain);
 	revert_separation(stacks, n - remain);
 	sort_stacks(stacks, n - remain);

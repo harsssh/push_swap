@@ -14,3 +14,5 @@ add_executable(args_test args_test.cpp ${ARGS_SOURCES})
 
 file(GLOB DEQUE_SOURCES ${CMAKE_SOURCE_DIR}/src/deque/*.c)
 add_executable(deque_test deque_test.cpp ${DEQUE_SOURCES})
+
+add_executable(quick_select_test quick_select_test.cpp ${CMAKE_SOURCE_DIR}/src/algorithm/quick_select.c)
