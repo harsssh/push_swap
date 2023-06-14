@@ -5,7 +5,7 @@ LIBFT:=libft/libft.a
 SRC_DIR=src
 BUILD_DIR:=build
 
-CFLAGS:=-Wall -Wextra -Werror -Ilibft/include -Isrc
+CFLAGS:=-g -Wall -Wextra -Werror -Ilibft/include -Isrc
 DEPFLAGS=-MT $@ -MMD -MP -MF $(BUILD_DIR)/$*.d
 
 SRC:=$(wildcard src/*.c) $(wildcard src/**/*.c)
