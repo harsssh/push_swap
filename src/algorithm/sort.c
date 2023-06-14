@@ -6,26 +6,27 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/14 17:35:55 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:51:29 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
+#include <stdbool.h>
 
 static int	get_pivot(t_stacks *stack)
 {
-	int			top[3];
-	long long	diff[3];
+	int		top[3];
+	bool	diff[3];
 
 	top[0] = deque_at_back(stack->a, 0);
 	top[1] = deque_at_back(stack->a, 1);
 	top[2] = deque_at_back(stack->a, 2);
-	diff[0] = top[0] - top[1];
-	diff[1] = top[1] - top[2];
-	diff[2] = top[2] - top[0];
-	if (diff[0] * diff[1] > 0)
+	diff[0] = top[0] > top[1];
+	diff[1] = top[1] > top[2];
+	diff[2] = top[2] > top[0];
+	if (!(diff[0] ^ diff[1]))
 		return (top[1]);
-	else if (diff[1] * diff[2] > 0)
+	else if (!(diff[1] ^ diff[2]))
 		return (top[2]);
 	else
 		return (top[0]);
