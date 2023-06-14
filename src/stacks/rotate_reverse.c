@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 15:18:31 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 03:37:17 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 06:16:01 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ static void	rotate_reverse_impl(t_deque *deque)
 // reverse rotate stack a
 void	stacks_rra(t_stacks *stacks)
 {
-	stacks_add_instruction(stacks, INST_RRA);
+	stacks_add_inst(stacks, INST_RRA);
 	rotate_reverse_impl(stacks->a);
 }
 
 // reverse rotate stack b
 void	stacks_rrb(t_stacks *stacks)
 {
-	stacks_add_instruction(stacks, INST_RRB);
+	stacks_add_inst(stacks, INST_RRB);
 	rotate_reverse_impl(stacks->b);
 }
 
 void	stacks_rrr(t_stacks *stacks)
 {
-	stacks_add_instruction(stacks, INST_RRR);
+	stacks_add_inst(stacks, INST_RRR);
 	rotate_reverse_impl(stacks->a);
 	rotate_reverse_impl(stacks->b);
 }

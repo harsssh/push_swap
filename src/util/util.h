@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_instruction.c                                  :+:      :+:    :+:   */
+/*   util.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/15 03:37:34 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 05:56:03 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/06/15 05:55:06 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/06/15 06:08:46 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stacks.h"
-#include "util/util.h"
+#ifndef UTIL_H
+# define UTIL_H
 
-void	stacks_add_inst(t_stacks *stacks, const char *inst)
-{
-	stacks->instructions = join(stacks->instructions, "\n");
-	stacks->instructions = join(stacks->instructions, inst);
-}
+char	*join(char *s1, const char *s2);
+char	*join_all(char **array, const char *sep);
+void	repeat_inst(t_stacks *stacks, void (*inst)(t_stacks *), size_t n);
+
+#endif

@@ -6,12 +6,13 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 03:36:48 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 06:15:39 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
 #include "error/error.h"
+#include "util/util.h"
 #include <libc.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -50,16 +51,9 @@ static int	get_pivot(t_stacks *stack, size_t n)
 	return (pivot);
 }
 
-static void	revert_separation(t_stacks *stacks, size_t n)
-{
-	while (n--)
-		stacks_pa(stacks);
-}
-
 static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
 {
 	size_t	remain;
-	size_t	i;
 
 	remain = 0;
 	while (n--)
@@ -72,19 +66,13 @@ static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
 			remain++;
 		}
 	}
-	if (remain != deque_size(stacks->a))
-	{
-		i = 0;
-		while (i < remain)
-		{
-			stacks_rra(stacks);
-			i++;
-		}
-	}
+	if (remain < deque_size(stacks->a))
+		repeat_inst(stacks, stacks_rra, remain);
 	return (remain);
 }
 
-void	sort_stacks(t_stacks *stacks, size_t n)
+// sort the first n elements of stack a in ascending order
+static void	do_sort_stacks(t_stacks *stacks, size_t n)
 {
 	size_t	remain;
 
@@ -99,7 +87,13 @@ void	sort_stacks(t_stacks *stacks, size_t n)
 	if (is_sorted(stacks, n))
 		return ;
 	remain = separate_by_pivot(stacks, n, get_pivot(stacks, n));
-	sort_stacks(stacks, remain);
-	revert_separation(stacks, n - remain);
-	sort_stacks(stacks, n - remain);
+	do_sort_stacks(stacks, remain);
+	repeat_inst(stacks, stacks_pa, n - remain);
+	do_sort_stacks(stacks, n - remain);
+}
+
+void	sort_stacks(t_stacks *stacks, size_t n)
+{
+	do_sort_stacks(stacks, n);
+	optimize_instructions(stacks);
 }

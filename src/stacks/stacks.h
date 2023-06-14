@@ -37,7 +37,7 @@ typedef struct s_stacks
 void		stacks_init(t_stacks *stacks, size_t capacity);
 void		stacks_destroy(t_stacks *stacks);
 
-void		stacks_add_instruction(t_stacks *stacks, const char *inst);
+void		stacks_add_inst(t_stacks *stacks, const char *inst);
 
 // swap two elements at the top of stack a
 void		stacks_sa(t_stacks *stacks);
