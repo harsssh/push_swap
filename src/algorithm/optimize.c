@@ -102,9 +102,9 @@ void	optimize_instructions(t_stacks *stacks)
 	if (array == NULL)
 		exit_with_message();
 	free(stacks->instructions);
+    replace_ra_pb_rra(array);
+    remove_adjacent(array, INST_RA, INST_RRA);
 	remove_adjacent(array, INST_PA, INST_PB);
-	remove_adjacent(array, INST_RA, INST_RRA);
-	replace_ra_pb_rra(array);
 	stacks->instructions = join_all(array, "\n");
 	free_array(array);
 }
