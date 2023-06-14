@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:03:05 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/13 16:51:09 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:08:46 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ size_t	deque_size(t_deque *deque)
 		return (deque->capacity - deque->begin + deque->end);
 }
 
-int	deque_at(t_deque *deque, int index)
+int	deque_at(t_deque *deque, unsigned int index)
 {
-	unsigned int	i;
+	return (deque->data[(deque->begin + index) % deque->capacity]);
+}
 
-	i = (deque->begin + index + deque->capacity) % deque->capacity;
-	return (deque->data[i]);
+int	deque_at_back(t_deque *deque, unsigned int index)
+{
+	return (deque_at(deque, deque_size(deque) - index - 1));
 }

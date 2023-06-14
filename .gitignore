@@ -7,3 +7,5 @@ build
 .idea
 .cache
 cmake-build-debug
+checker_Mac
+pain.sh
