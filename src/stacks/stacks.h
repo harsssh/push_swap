@@ -13,17 +13,17 @@
 #ifndef STACKS_H
 # define STACKS_H
 
-# define INST_SA "sa\n"
-# define INST_SB "sb\n"
-# define INST_SS "ss\n"
-# define INST_PA "pa\n"
-# define INST_PB "pb\n"
-# define INST_RA "ra\n"
-# define INST_RB "rb\n"
-# define INST_RR "rr\n"
-# define INST_RRA "rra\n"
-# define INST_RRB "rrb\n"
-# define INST_RRR "rrr\n"
+# define INST_SA "sa"
+# define INST_SB "sb"
+# define INST_SS "ss"
+# define INST_PA "pa"
+# define INST_PB "pb"
+# define INST_RA "ra"
+# define INST_RB "rb"
+# define INST_RR "rr"
+# define INST_RRA "rra"
+# define INST_RRB "rrb"
+# define INST_RRR "rrr"
 
 # include "deque/deque.h"
 
