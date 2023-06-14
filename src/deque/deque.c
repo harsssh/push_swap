@@ -49,12 +49,12 @@ size_t	deque_size(t_deque *deque)
 		return (deque->capacity - deque->begin + deque->end);
 }
 
-int	deque_at(t_deque *deque, unsigned int index)
+int	deque_at(t_deque *deque, size_t index)
 {
 	return (deque->data[(deque->begin + index) % deque->capacity]);
 }
 
-int	deque_at_back(t_deque *deque, unsigned int index)
+int	deque_at_back(t_deque *deque, size_t index)
 {
 	return (deque_at(deque, deque_size(deque) - index - 1));
 }

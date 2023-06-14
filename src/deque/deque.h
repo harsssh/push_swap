@@ -16,15 +16,14 @@
 # include <stdbool.h>
 # include <stddef.h>
 
-struct					s_deque
+typedef struct					s_deque
 {
 	int					*data;
 	size_t				begin;
 	size_t				end;
 	size_t				capacity;
 	bool				is_empty;
-};
-typedef struct s_deque	t_deque;
+} t_deque;
 
 t_deque					*deque_init(size_t capacity);
 void					deque_destroy(t_deque *deque);
@@ -33,7 +32,7 @@ void					deque_push_front(t_deque *deque, int value);
 void					deque_push_back(t_deque *deque, int value);
 int						deque_pop_front(t_deque *deque);
 int						deque_pop_back(t_deque *deque);
-int						deque_at(t_deque *deque, unsigned int index);
-int						deque_at_back(t_deque *deque, unsigned int index);
+int						deque_at(t_deque *deque, size_t index);
+int						deque_at_back(t_deque *deque, size_t index);
 
 #endif
