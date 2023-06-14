@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:54:35 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 06:47:38 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 07:11:18 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ static void	remove_adjacent(char **array, const char *s, const char *t)
 	}
 }
 
-static void	replace_sequence(char **array, const char *s, const char *t,
-		const char *u)
+static void	replace_ra_pb_rra(char **array)
 {
 	size_t	i;
 	size_t	j;
@@ -61,8 +60,8 @@ static void	replace_sequence(char **array, const char *s, const char *t,
 	j = 0;
 	while (array[i])
 	{
-		if (j > 1 && streq(array[j - 2], s) && streq(array[j - 1], t)
-			&& streq(array[i], u))
+		if (j > 1 && streq(array[j - 2], INST_RA) && streq(array[j - 1],
+				INST_PB) && streq(array[i], INST_RRA))
 		{
 			free(array[i]);
 			free(array[j - 2]);
@@ -105,7 +104,7 @@ void	optimize_instructions(t_stacks *stacks)
 	free(stacks->instructions);
 	remove_adjacent(array, INST_PA, INST_PB);
 	remove_adjacent(array, INST_RA, INST_RRA);
-	replace_sequence(array, INST_RA, INST_PB, INST_RRA);
+	replace_ra_pb_rra(array);
 	stacks->instructions = join_all(array, "\n");
 	free_array(array);
 }
