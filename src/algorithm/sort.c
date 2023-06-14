@@ -6,30 +6,29 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/14 12:09:00 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:35:55 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
-#include <libc.h>
 
-static int	compare_int(const void *a, const void *b)
+static int	get_pivot(t_stacks *stack)
 {
-	return (*(int *)a - *(int *)b);
-}
+	int			top[3];
+	long long	diff[3];
 
-static int	get_pivot(t_stacks *stack, size_t n)
-{
-	int	*array;
-	int	pivot;
-
-	array = malloc(sizeof(int) * n);
-	for (size_t i = 0; i < n; i++)
-		array[i] = deque_at_back(stack->a, i);
-	qsort(array, n, sizeof(int), compare_int);
-	pivot = array[n / 2];
-	free(array);
-	return (pivot);
+	top[0] = deque_at_back(stack->a, 0);
+	top[1] = deque_at_back(stack->a, 1);
+	top[2] = deque_at_back(stack->a, 2);
+	diff[0] = top[0] - top[1];
+	diff[1] = top[1] - top[2];
+	diff[2] = top[2] - top[0];
+	if (diff[0] * diff[1] > 0)
+		return (top[1]);
+	else if (diff[1] * diff[2] > 0)
+		return (top[2]);
+	else
+		return (top[0]);
 }
 
 static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
@@ -75,7 +74,7 @@ void	sort_stacks(t_stacks *stacks, size_t n)
 			stacks_sa(stacks);
 		return ;
 	}
-	remain = separate_by_pivot(stacks, n, get_pivot(stacks, n));
+	remain = separate_by_pivot(stacks, n, get_pivot(stacks));
 	sort_stacks(stacks, remain);
 	revert_separation(stacks, n - remain);
 	sort_stacks(stacks, n - remain);
