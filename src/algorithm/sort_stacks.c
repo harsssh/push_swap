@@ -14,6 +14,7 @@
 #include <libc.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "error/error.h"
 
 static bool	is_sorted(t_stacks *stacks, size_t n)
 {
@@ -37,7 +38,7 @@ static int	get_pivot(t_stacks *stack, size_t n)
 
 	array = malloc(sizeof(int) * n);
 	if (!array)
-		exit(1);
+        exit_with_message();
 	i = 0;
 	while (i < n)
 	{

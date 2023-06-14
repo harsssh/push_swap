@@ -12,16 +12,10 @@
 
 #include "libft.h"
 #include "parse_args.h"
+#include "error/error.h"
 #include <limits.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include <unistd.h>
-
-static void	exit_with_message(void)
-{
-	ft_putstr_fd(ERR_MSG, STDERR_FILENO);
-	exit(1);
-}
 
 // without positive sign, multiple negative signes, and leading zeros
 // "-0" is not allowed
