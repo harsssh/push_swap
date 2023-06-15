@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:11:07 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 01:11:08 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:38:36 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,14 @@ static size_t	partition(int *array, size_t left, size_t right)
 	int	pivot;
 
 	pivot = get_pivot(array, left, right);
-	while (true)
+	while (left < right)
 	{
 		while (array[left] < pivot)
-			left++;
+			++left;
 		while (array[right] > pivot)
-			right--;
-		if (left >= right)
-			break ;
-		swap(array + left, array + right);
-		left++;
-		right--;
+			--right;
+		if (left < right)
+			swap(array + left, array + right);
 	}
 	return (left);
 }

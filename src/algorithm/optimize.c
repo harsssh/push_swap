@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:54:35 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 07:11:18 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:37:58 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void	optimize_instructions(t_stacks *stacks)
 	if (array == NULL)
 		exit_with_message();
 	free(stacks->instructions);
-    replace_ra_pb_rra(array);
-    remove_adjacent(array, INST_RA, INST_RRA);
+	replace_ra_pb_rra(array);
+	remove_adjacent(array, INST_RA, INST_RRA);
 	remove_adjacent(array, INST_PA, INST_PB);
 	stacks->instructions = join_all(array, "\n");
 	free_array(array);

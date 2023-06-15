@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 06:15:39 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:38:46 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,53 @@ static int	get_pivot(t_stacks *stack, size_t n)
 
 static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
 {
-	size_t	remain;
+	size_t	push_count;
+	size_t	rotate_count;
+	size_t	i;
 
-	remain = 0;
-	while (n--)
+	i = n;
+	push_count = 0;
+	rotate_count = 0;
+	while (i--)
 	{
 		if (deque_at_back(stacks->a, 0) < pivot)
+		{
 			stacks_pb(stacks);
+			++push_count;
+		}
 		else
 		{
 			stacks_ra(stacks);
-			remain++;
+			++rotate_count;
 		}
+		if (push_count >= n / 2)
+			break ;
 	}
-	if (remain < deque_size(stacks->a))
-		repeat_inst(stacks, stacks_rra, remain);
-	return (remain);
+	if (n - push_count != deque_size(stacks->a))
+		repeat_inst(stacks, stacks_rra, rotate_count);
+	return (n - push_count);
+}
+
+static void	base_case(t_stacks *stacks, size_t n)
+{
+	if (n == 1)
+		return ;
+	if (n == 2)
+	{
+		if (deque_at_back(stacks->a, 0) > deque_at_back(stacks->a, 1))
+			stacks_sa(stacks);
+		return ;
+	}
+	if (n == 3 && deque_size(stacks->a) == 3)
+	{
+		if (deque_at_back(stacks->a, 0) > deque_at_back(stacks->a, 1))
+			stacks_sa(stacks);
+		if (deque_at_back(stacks->a, 1) > deque_at_back(stacks->a, 2))
+			stacks_rra(stacks);
+		if (deque_at_back(stacks->a, 0) > deque_at_back(stacks->a, 1))
+			stacks_sa(stacks);
+		return ;
+	}
 }
 
 // sort the first n elements of stack a in ascending order
@@ -76,12 +107,9 @@ static void	do_sort_stacks(t_stacks *stacks, size_t n)
 {
 	size_t	remain;
 
-	if (n <= 1)
-		return ;
-	if (n == 2)
+	if (n <= 3)
 	{
-		if (deque_at_back(stacks->a, 0) > deque_at_back(stacks->a, 1))
-			stacks_sa(stacks);
+		base_case(stacks, n);
 		return ;
 	}
 	if (is_sorted(stacks, n))
