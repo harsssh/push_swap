@@ -80,8 +80,11 @@ static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
 	return (n - push_count);
 }
 
-static void	base_case(t_stacks *stacks, size_t n)
+// sort the first n elements of stack a in ascending order
+static void	do_sort_stacks(t_stacks *stacks, size_t n)
 {
+	size_t	remain;
+
 	if (n == 1)
 		return ;
 	if (n == 2)
@@ -98,18 +101,6 @@ static void	base_case(t_stacks *stacks, size_t n)
 			stacks_rra(stacks);
 		if (deque_at_back(stacks->a, 0) > deque_at_back(stacks->a, 1))
 			stacks_sa(stacks);
-		return ;
-	}
-}
-
-// sort the first n elements of stack a in ascending order
-static void	do_sort_stacks(t_stacks *stacks, size_t n)
-{
-	size_t	remain;
-
-	if (n <= 3)
-	{
-		base_case(stacks, n);
 		return ;
 	}
 	if (is_sorted(stacks, n))
