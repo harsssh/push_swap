@@ -6,12 +6,13 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 11:31:07 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/22 11:31:08 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:23:45 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
 #include "error/error.h"
+#include "libft.h"
 #include <stdlib.h>
 
 bool	is_sorted(t_stacks *stacks, size_t n)
@@ -46,4 +47,20 @@ int	get_median(t_deque *deque, size_t n)
 	pivot = quick_select(array, n, n / 2);
 	free(array);
 	return (pivot);
+}
+
+void	repeat_inst(t_stacks *stacks, void (*inst)(t_stacks *), size_t n)
+{
+	while (n--)
+		inst(stacks);
+}
+
+char	*must_strdup(const char *s)
+{
+	char	*res;
+
+	res = ft_strdup(s);
+	if (res == NULL)
+		exit_with_message();
+	return (res);
 }

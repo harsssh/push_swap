@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:55:02 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/22 17:56:38 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:23:23 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ char	*join_all(char **array, const char *sep)
 	return (result);
 }
 
-void	repeat_inst(t_stacks *stacks, void (*inst)(t_stacks *), size_t n)
-{
-	while (n--)
-		inst(stacks);
-}
-
 void	free_array(char **array)
 {
 	size_t	i;
@@ -67,4 +61,9 @@ void	safe_free(void **ptr)
 		return ;
 	free(*ptr);
 	*ptr = NULL;
+}
+
+static bool	streq(const char *s, const char *t)
+{
+	return (ft_strcmp(s, t) == 0);
 }

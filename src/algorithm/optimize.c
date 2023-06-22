@@ -15,12 +15,8 @@
 #include "libft.h"
 #include "stacks/stacks.h"
 #include "util/util.h"
+#include "helper.h"
 #include <stdlib.h>
-
-static bool	streq(const char *s, const char *t)
-{
-	return (ft_strcmp(s, t) == 0);
-}
 
 static void	remove_adjacent(char **array, const char *s, const char *t)
 {
@@ -36,7 +32,6 @@ static void	remove_adjacent(char **array, const char *s, const char *t)
 		{
 			safe_free((void **)(array + i));
 			safe_free((void **)(array + j - 1));
-			array[i] = NULL;
 			--j;
 		}
 		else
@@ -64,9 +59,7 @@ static void	replace_ra_pb_rra(char **array)
 		{
 			safe_free((void **)(array + i));
 			safe_free((void **)(array + j - 2));
-			array[j - 2] = ft_strdup(INST_SA);
-			if (array[j - 2] == NULL)
-				exit_with_message();
+			array[j - 2] = must_strdup(INST_SA);
 		}
 		else
 		{
@@ -93,9 +86,7 @@ static void	replace_rb_pa_rrb(char **array)
 		{
 			safe_free((void **)(array + i));
 			safe_free((void **)(array + j - 2));
-			array[j - 2] = ft_strdup(INST_SB);
-			if (array[j - 2] == NULL)
-				exit_with_message();
+			array[j - 2] = must_strdup(INST_SB);
 		}
 		else
 		{
@@ -123,9 +114,7 @@ static void	replace_pb_rra_pa(char **array)
 			safe_free((void **)(array + i));
 			safe_free((void **)(array + j - 2));
 			array[j - 2] = array[j - 1];
-			array[j - 1] = ft_strdup(INST_SA);
-			if (array[j - 1] == NULL)
-				exit_with_message();
+			array[j - 1] = must_strdup(INST_SA);
 		}
 		else
 		{
