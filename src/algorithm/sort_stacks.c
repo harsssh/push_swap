@@ -6,15 +6,17 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 18:38:46 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 08:14:43 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
+#include "deque/deque.h"
 #include "error/error.h"
 #include "util/util.h"
 #include <libc.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 static bool	is_sorted(t_stacks *stacks, size_t n)
@@ -31,7 +33,7 @@ static bool	is_sorted(t_stacks *stacks, size_t n)
 	return (true);
 }
 
-static int	get_pivot(t_stacks *stack, size_t n)
+static int	get_pivot(t_deque *deque, size_t n)
 {
 	size_t	i;
 	int		*array;
@@ -43,7 +45,7 @@ static int	get_pivot(t_stacks *stack, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		array[i] = deque_at_back(stack->a, i);
+		array[i] = deque_at_back(deque, i);
 		i++;
 	}
 	pivot = quick_select(array, n, n / 2);
@@ -51,16 +53,16 @@ static int	get_pivot(t_stacks *stack, size_t n)
 	return (pivot);
 }
 
-static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
+static size_t	separate_by_pivot(t_stacks *stacks, size_t n)
 {
+	int		pivot;
 	size_t	push_count;
 	size_t	rotate_count;
-	size_t	i;
 
-	i = n;
+	pivot = get_pivot(stacks->a, n);
 	push_count = 0;
 	rotate_count = 0;
-	while (i--)
+	while (push_count < n / 2)
 	{
 		if (deque_at_back(stacks->a, 0) < pivot)
 		{
@@ -72,18 +74,47 @@ static size_t	separate_by_pivot(t_stacks *stacks, size_t n, int pivot)
 			stacks_ra(stacks);
 			++rotate_count;
 		}
-		if (push_count >= n / 2)
-			break ;
 	}
 	if (n - push_count != deque_size(stacks->a))
 		repeat_inst(stacks, stacks_rra, rotate_count);
-	return (n - push_count);
+	return (push_count);
+}
+
+static size_t	merge_back_to_a(t_stacks *stacks, size_t n)
+{
+	int		pivot;
+	size_t	push_count;
+	size_t	rotate_count;
+
+	if (n <= 3)
+	{
+		repeat_inst(stacks, stacks_pa, n);
+		return n;
+	}
+	pivot = get_pivot(stacks->b, n);
+	push_count = 0;
+	rotate_count = 0;
+	while (push_count < (n+1) / 2)
+	{
+		if (deque_at_back(stacks->b, 0) >= pivot)
+		{
+			stacks_pa(stacks);
+			++push_count;
+		}
+		else
+		{
+			stacks_rb(stacks);
+			++rotate_count;
+		}
+	}
+	repeat_inst(stacks, stacks_rrb, rotate_count);
+	return (push_count);
 }
 
 // sort the first n elements of stack a in ascending order
 static void	do_sort_stacks(t_stacks *stacks, size_t n)
 {
-	size_t	remain;
+	size_t	pushed;
 
 	if (n == 1)
 		return ;
@@ -105,10 +136,14 @@ static void	do_sort_stacks(t_stacks *stacks, size_t n)
 	}
 	if (is_sorted(stacks, n))
 		return ;
-	remain = separate_by_pivot(stacks, n, get_pivot(stacks, n));
-	do_sort_stacks(stacks, remain);
-	repeat_inst(stacks, stacks_pa, n - remain);
-	do_sort_stacks(stacks, n - remain);
+	pushed = separate_by_pivot(stacks, n);
+	do_sort_stacks(stacks, n - pushed);
+	while (pushed > 0)
+	{
+		size_t k = merge_back_to_a(stacks, pushed);
+		pushed -= k;
+		do_sort_stacks(stacks, k);
+	}
 }
 
 void	sort_stacks(t_stacks *stacks, size_t n)
