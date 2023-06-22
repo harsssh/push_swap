@@ -107,7 +107,7 @@ static void	do_sort_stacks(t_stacks *stacks, size_t n)
 	do_sort_stacks(stacks, n - pushed);
 	while (pushed > 0)
 	{
-		if (pushed > 3)
+		if (pushed > 2)
 			restored = restore_half(stacks, pushed);
 		else
 		{
