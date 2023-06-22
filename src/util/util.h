@@ -16,5 +16,6 @@
 char	*join(char *s1, const char *s2);
 char	*join_all(char **array, const char *sep);
 void	repeat_inst(t_stacks *stacks, void (*inst)(t_stacks *), size_t n);
+void	free_array(char **array);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:55:02 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 06:15:52 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:04:40 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,17 @@ void	repeat_inst(t_stacks *stacks, void (*inst)(t_stacks *), size_t n)
 {
 	while (n--)
 		inst(stacks);
+}
+
+void	free_array(char **array)
+{
+	size_t	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		++i;
+	}
+	free(array);
 }

@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:54:35 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 18:37:58 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:04:50 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,34 @@ static void	replace_ra_pb_rra(char **array)
 	}
 }
 
-static void	free_array(char **array)
+static void	replace_rb_pa_rrb(char **array)
 {
 	size_t	i;
+	size_t	j;
 
 	i = 0;
+	j = 0;
 	while (array[i])
 	{
-		free(array[i]);
+		if (j > 1 && streq(array[j - 2], INST_RB) && streq(array[j - 1],
+				INST_PA) && streq(array[i], INST_RRB))
+		{
+			free(array[i]);
+			free(array[j - 2]);
+			array[i] = NULL;
+			array[j - 2] = ft_strdup(INST_SB);
+			if (array[j - 2] == NULL)
+				exit_with_message();
+		}
+		else
+		{
+			array[j] = array[i];
+			if (i != j)
+				array[i] = NULL;
+			++j;
+		}
 		++i;
 	}
-	free(array);
 }
 
 void	optimize_instructions(t_stacks *stacks)
@@ -103,6 +120,7 @@ void	optimize_instructions(t_stacks *stacks)
 		exit_with_message();
 	free(stacks->instructions);
 	replace_ra_pb_rra(array);
+	replace_rb_pa_rrb(array);
 	remove_adjacent(array, INST_RA, INST_RRA);
 	remove_adjacent(array, INST_RB, INST_RRB);
 	remove_adjacent(array, INST_PA, INST_PB);
