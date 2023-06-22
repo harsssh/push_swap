@@ -111,6 +111,37 @@ static void	replace_rb_pa_rrb(char **array)
 	}
 }
 
+static void	replace_pb_rra_pa(char **array)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (array[i])
+	{
+		if (j > 1 && streq(array[j - 2], INST_PB) && streq(array[j - 1],
+														   INST_RRA) && streq(array[i], INST_PA))
+		{
+			free(array[i]);
+			free(array[j - 2]);
+			array[i] = NULL;
+			array[j - 2] = array[j - 1];
+			array[j - 1] = ft_strdup(INST_SA);
+			if (array[j - 1] == NULL)
+				exit_with_message();
+		}
+		else
+		{
+			array[j] = array[i];
+			if (i != j)
+				array[i] = NULL;
+			++j;
+		}
+		++i;
+	}
+}
+
 void	optimize_instructions(t_stacks *stacks)
 {
 	char	**array;
@@ -121,6 +152,7 @@ void	optimize_instructions(t_stacks *stacks)
 	free(stacks->instructions);
 	replace_ra_pb_rra(array);
 	replace_rb_pa_rrb(array);
+	replace_pb_rra_pa(array);
 	remove_adjacent(array, INST_RA, INST_RRA);
 	remove_adjacent(array, INST_RB, INST_RRB);
 	remove_adjacent(array, INST_PA, INST_PB);
