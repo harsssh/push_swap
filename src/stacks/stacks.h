@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 15:18:36 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 03:36:59 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:49:28 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_stacks
 	t_deque	*a;
 	t_deque	*b;
 	char	*instructions;
+	size_t	partitions;
 }			t_stacks;
 
 void		stacks_init(t_stacks *stacks, size_t capacity);

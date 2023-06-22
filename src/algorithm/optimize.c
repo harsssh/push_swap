@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:54:35 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/22 12:04:50 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:06:21 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ static void	remove_adjacent(char **array, const char *s, const char *t)
 		if (j > 0 && ((streq(array[i], s) && streq(array[j - 1], t))
 				|| (streq(array[i], t) && streq(array[j - 1], s))))
 		{
-			free(array[i]);
-			free(array[j - 1]);
+			safe_free((void **)(array + i));
+			safe_free((void **)(array + j - 1));
 			array[i] = NULL;
-			array[j - 1] = NULL;
 			--j;
 		}
 		else
@@ -63,9 +62,8 @@ static void	replace_ra_pb_rra(char **array)
 		if (j > 1 && streq(array[j - 2], INST_RA) && streq(array[j - 1],
 				INST_PB) && streq(array[i], INST_RRA))
 		{
-			free(array[i]);
-			free(array[j - 2]);
-			array[i] = NULL;
+			safe_free((void **)(array + i));
+			safe_free((void **)(array + j - 2));
 			array[j - 2] = ft_strdup(INST_SA);
 			if (array[j - 2] == NULL)
 				exit_with_message();
@@ -93,9 +91,8 @@ static void	replace_rb_pa_rrb(char **array)
 		if (j > 1 && streq(array[j - 2], INST_RB) && streq(array[j - 1],
 				INST_PA) && streq(array[i], INST_RRB))
 		{
-			free(array[i]);
-			free(array[j - 2]);
-			array[i] = NULL;
+			safe_free((void **)(array + i));
+			safe_free((void **)(array + j - 2));
 			array[j - 2] = ft_strdup(INST_SB);
 			if (array[j - 2] == NULL)
 				exit_with_message();
@@ -121,11 +118,10 @@ static void	replace_pb_rra_pa(char **array)
 	while (array[i])
 	{
 		if (j > 1 && streq(array[j - 2], INST_PB) && streq(array[j - 1],
-														   INST_RRA) && streq(array[i], INST_PA))
+				INST_RRA) && streq(array[i], INST_PA))
 		{
-			free(array[i]);
-			free(array[j - 2]);
-			array[i] = NULL;
+			safe_free((void **)(array + i));
+			safe_free((void **)(array + j - 2));
 			array[j - 2] = array[j - 1];
 			array[j - 1] = ft_strdup(INST_SA);
 			if (array[j - 1] == NULL)

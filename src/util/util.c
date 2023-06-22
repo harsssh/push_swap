@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:55:02 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/22 12:04:40 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:56:38 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,12 @@ void	free_array(char **array)
 		++i;
 	}
 	free(array);
+}
+
+void	safe_free(void **ptr)
+{
+	if (ptr == NULL)
+		return ;
+	free(*ptr);
+	*ptr = NULL;
 }

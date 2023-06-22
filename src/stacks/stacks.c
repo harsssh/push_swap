@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 02:00:23 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/15 03:38:02 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:49:51 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	stacks_init(t_stacks *stacks, size_t capacity)
 	if (stacks->a == NULL || stacks->b == NULL)
 		exit_with_message();
 	stacks->instructions = NULL;
+	stacks->partitions = 1;
 }
 
 void	stacks_destroy(t_stacks *stacks)
