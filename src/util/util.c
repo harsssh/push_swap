@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:55:02 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/22 18:23:23 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:24:55 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	safe_free(void **ptr)
 	*ptr = NULL;
 }
 
-static bool	streq(const char *s, const char *t)
+bool	streq(const char *s, const char *t)
 {
 	return (ft_strcmp(s, t) == 0);
 }
