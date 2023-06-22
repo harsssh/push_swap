@@ -17,6 +17,5 @@
 
 void	sort_stacks(t_stacks *stacks, size_t n);
 int		quick_select(int *array, size_t n, size_t k);
-void	optimize_instructions(t_stacks *stacks);
 
 #endif

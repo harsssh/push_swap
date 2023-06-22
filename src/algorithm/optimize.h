@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper.h                                           :+:      :+:    :+:   */
+/*   optimize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 11:31:12 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/23 00:32:48 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/06/23 00:56:39 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/06/23 00:56:52 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HELPER_H
-# define HELPER_H
+#ifndef OPTIMIZE_H
+# define OPTIMIZE_H
 
-# include "deque/deque.h"
 # include "stacks/stacks.h"
-# include <stdbool.h>
 
-bool	is_sorted(t_stacks *stacks, size_t n);
-int		get_median(t_deque *deque, size_t n);
-void	get_boundaries(t_deque *deque, size_t n, int *lower, int *upper);
-void	repeat_inst(t_stacks *stacks, void (*inst)(t_stacks *), size_t n);
-char	*must_strdup(const char *s);
+void	optimize_instructions(t_stacks *stacks);
+
+void	replace_ra_pb_rra(char **array);
+void	replace_rb_pa_rrb(char **array);
+void	replace_pb_rra_pa(char **array);
+void	replace_rb_ra(char **array);
 
 #endif

@@ -6,32 +6,36 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/22 17:52:16 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/06/23 00:57:09 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algorithm.h"
 #include "deque/deque.h"
 #include "helper.h"
-#include "util/util.h"
+#include "optimize.h"
 #include <stdbool.h>
 #include <stdio.h>
 
 static size_t	partition(t_stacks *stacks, size_t n)
 {
-	int		pivot;
+	int		lower;
+	int		upper;
 	size_t	push_count;
 	size_t	rotate_count;
 
-	pivot = get_median(stacks->a, n);
+	++stacks->partitions;
+	get_boundaries(stacks->a, n, &lower, &upper);
 	push_count = 0;
 	rotate_count = 0;
 	while (push_count < n / 2)
 	{
-		if (deque_at_back(stacks->a, 0) < pivot)
+		if (deque_at_back(stacks->a, 0) < upper)
 		{
 			stacks_pb(stacks);
 			++push_count;
+			if (stacks->partitions == 2 && deque_at_back(stacks->b, 0) < lower)
+				stacks_rb(stacks);
 		}
 		else
 		{
@@ -41,7 +45,6 @@ static size_t	partition(t_stacks *stacks, size_t n)
 	}
 	if (n - push_count != deque_size(stacks->a))
 		repeat_inst(stacks, stacks_rra, rotate_count);
-	++stacks->partitions;
 	return (push_count);
 }
 
