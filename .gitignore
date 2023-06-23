@@ -10,3 +10,4 @@ cmake-build-debug
 checker
 pain.sh
 push_swap_tester
+worst.sh
