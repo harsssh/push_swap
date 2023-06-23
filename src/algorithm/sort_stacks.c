@@ -24,7 +24,6 @@ static size_t	partition(t_stacks *stacks, size_t n)
 	size_t	push_count;
 	size_t	rotate_count;
 
-	++stacks->partitions;
 	get_boundaries(stacks->a, n, &lower, &upper);
 	push_count = 0;
 	rotate_count = 0;
@@ -34,7 +33,7 @@ static size_t	partition(t_stacks *stacks, size_t n)
 		{
 			stacks_pb(stacks);
 			++push_count;
-			if (stacks->partitions == 2 && deque_at_back(stacks->b, 0) < lower)
+			if (stacks->partitions == 1 && deque_at_back(stacks->b, 0) < lower)
 				stacks_rb(stacks);
 		}
 		else
@@ -45,6 +44,7 @@ static size_t	partition(t_stacks *stacks, size_t n)
 	}
 	if (n - push_count != deque_size(stacks->a))
 		repeat_inst(stacks, stacks_rra, rotate_count);
+	++stacks->partitions;
 	return (push_count);
 }
 
