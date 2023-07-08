@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/23 00:57:09 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/07/08 13:37:22 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static size_t	restore_half(t_stacks *stacks, size_t n)
 	return (push_count);
 }
 
-static bool	can_return(t_stacks *stacks, size_t n)
+static bool	should_terminate(t_stacks *stacks, size_t n)
 {
 	if (n == 1)
 		return (true);
@@ -106,7 +106,7 @@ static void	do_sort_stacks(t_stacks *stacks, size_t n)
 	size_t	pushed;
 	size_t	restored;
 
-	if (can_return(stacks, n))
+	if (should_terminate(stacks, n))
 		return ;
 	pushed = partition(stacks, n);
 	do_sort_stacks(stacks, n - pushed);
