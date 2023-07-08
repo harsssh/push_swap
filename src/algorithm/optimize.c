@@ -6,15 +6,15 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:54:35 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/22 18:06:21 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/07/08 23:05:37 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error/error.h"
 #include "libft.h"
+#include "optimize.h"
 #include "stacks/stacks.h"
 #include "util/util.h"
-#include "optimize.h"
 #include <stdlib.h>
 
 static void	remove_adjacent(char **array, const char *s, const char *t)

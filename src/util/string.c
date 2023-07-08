@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   string.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 05:55:02 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/22 18:24:55 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/07/08 23:05:23 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "util.h"
 #include "error/error.h"
 #include "libft.h"
 #include "stacks/stacks.h"
+#include "util.h"
 #include <stdlib.h>
 
 char	*join(char *s1, const char *s2)
