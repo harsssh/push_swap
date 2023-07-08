@@ -21,6 +21,5 @@ bool	is_sorted(t_stacks *stacks, size_t n);
 int		get_median(t_deque *deque, size_t n);
 void	get_boundaries(t_deque *deque, size_t n, int *lower, int *upper);
 void	repeat_inst(t_stacks *stacks, void (*inst)(t_stacks *), size_t n);
-char	*must_strdup(const char *s);
 
 #endif

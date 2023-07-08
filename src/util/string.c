@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "util.h"
 #include "error/error.h"
 #include "libft.h"
 #include "stacks/stacks.h"
@@ -42,28 +43,17 @@ char	*join_all(char **array, const char *sep)
 	return (result);
 }
 
-void	free_array(char **array)
-{
-	size_t	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		++i;
-	}
-	free(array);
-}
-
-void	safe_free(void **ptr)
-{
-	if (ptr == NULL)
-		return ;
-	free(*ptr);
-	*ptr = NULL;
-}
-
 bool	streq(const char *s, const char *t)
 {
 	return (ft_strcmp(s, t) == 0);
+}
+
+char	*must_strdup(const char *s)
+{
+	char	*res;
+
+	res = ft_strdup(s);
+	if (res == NULL)
+		exit_with_message();
+	return (res);
 }

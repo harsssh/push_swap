@@ -13,12 +13,16 @@
 #ifndef UTIL_H
 # define UTIL_H
 
+# include <stdbool.h>
+# include "deque/deque.h"
 # include "stacks/stacks.h"
 
 char	*join(char *s1, const char *s2);
 char	*join_all(char **array, const char *sep);
+bool	streq(const char *s, const char *t);
+char	*must_strdup(const char *s);
+
 void	free_array(char **array);
 void	safe_free(void **ptr);
-bool	streq(const char *s, const char *t);
 
 #endif

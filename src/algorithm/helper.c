@@ -12,7 +12,6 @@
 
 #include "algorithm.h"
 #include "error/error.h"
-#include "libft.h"
 #include <stdlib.h>
 
 bool	is_sorted(t_stacks *stacks, size_t n)
@@ -72,14 +71,4 @@ void	repeat_inst(t_stacks *stacks, void (*inst)(t_stacks *), size_t n)
 {
 	while (n--)
 		inst(stacks);
-}
-
-char	*must_strdup(const char *s)
-{
-	char	*res;
-
-	res = ft_strdup(s);
-	if (res == NULL)
-		exit_with_message();
-	return (res);
 }

@@ -14,6 +14,7 @@
 #include "optimize.h"
 #include "stacks/stacks.h"
 #include "util/util.h"
+#include "util.h"
 
 void	replace_ra_pb_rra(char **array)
 {

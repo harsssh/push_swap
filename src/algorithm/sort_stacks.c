@@ -16,7 +16,6 @@
 #include "optimize.h"
 #include "stacks/stacks.h"
 #include <stdbool.h>
-#include <stdio.h>
 
 static size_t	partition(t_stacks *stacks, size_t n)
 {
