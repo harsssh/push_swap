@@ -6,15 +6,16 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 15:55:14 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/13 13:53:24 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:30:35 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "error/error.h"
 #include "libft.h"
 #include "parse_args.h"
-#include "error/error.h"
 #include <limits.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 // without positive sign, multiple negative signes, and leading zeros
@@ -81,7 +82,7 @@ int	*parse_args(int argc, char **argv)
 	size_t	i;
 
 	if (argc < 2)
-		exit_with_message();
+		exit(1);
 	buf = (int *)ft_calloc(argc - 1, sizeof(int));
 	if (buf == NULL)
 		exit_with_message();
