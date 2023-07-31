@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdio.h                                         :+:      :+:    :+:   */
+/*   ft_strall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 01:01:23 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/06/13 01:01:24 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/07/31 00:41:54 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/07/31 00:41:56 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDIO_H
-# define FT_STDIO_H
+#include "stddef.h"
 
-void	ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
-
-char	*get_next_line(int fd);
-int		ft_dprintf(int fd, const char *format, ...);
-
-#endif
+int	ft_strall(const char *str, int (*f)(int))
+{
+	if (str == NULL || f == NULL)
+		return (0);
+	while (*str)
+	{
+		if (!f(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}

@@ -6,11 +6,12 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:47:22 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/05/23 13:49:20 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:35:11 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ctype.h"
+#include <errno.h>
 #include <limits.h>
 
 static int	read_up_to_sign(const char **s)
@@ -52,6 +53,7 @@ long	ft_atol(const char *str)
 		x = *str++ - '0';
 		if (is_overflow(sign, num, x))
 		{
+			errno = ERANGE;
 			if (sign == 1)
 				return ((int)LONG_MAX);
 			return ((int)LONG_MIN);

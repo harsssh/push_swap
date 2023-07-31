@@ -4,7 +4,7 @@ project(libft C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror")
 
-file(GLOB_RECURSE SOURCES *.c)
+file(GLOB SOURCES *.c **/*.c)
 
 add_library(ft STATIC ${SOURCES})
 target_include_directories(ft PUBLIC include)
