@@ -6,52 +6,44 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 15:55:14 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/07/30 18:30:35 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:51:58 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error/error.h"
+#include "ft_ctype.h"
+#include "ft_string.h"
 #include "libft.h"
 #include "parse_args.h"
+#include <errno.h>
 #include <limits.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-// without positive sign, multiple negative signes, and leading zeros
-// "-0" is not allowed
 static bool	is_number(char *s)
 {
-	size_t	i;
-
 	if (s == NULL || s[0] == '\0')
 		return (false);
-	i = 0;
-	if (s[0] == '-')
+	if (s[0] == '+' || s[0] == '-')
 	{
-		if (s[1] == '\0' || s[1] == '0')
+		if (s[1] == '\0')
 			return (false);
-		i++;
+		++s;
 	}
-	while (s[i])
-	{
-		if (!ft_isdigit(s[i]))
-			return (false);
-		i++;
-	}
-	if (s[0] != '-' && i > 1 && s[0] == '0')
+	if (!ft_strall(s, ft_isdigit))
 		return (false);
 	return (true);
 }
 
 static int	parse_single_arg(char *arg)
 {
-	long long	num;
+	long	num;
 
 	if (!is_number(arg))
 		exit_with_message();
-	num = ft_atoll(arg);
-	if (num < INT_MIN || num > INT_MAX)
+	num = ft_atol(arg);
+	if (errno == ERANGE || num < INT_MIN || INT_MAX < num)
 		exit_with_message();
 	return ((int)num);
 }
