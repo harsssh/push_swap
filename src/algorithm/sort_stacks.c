@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:08:28 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/07/08 23:02:38 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:38:52 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ static size_t	partition(t_stacks *stacks, size_t n)
 			++push_count;
 			if (stacks->partitions == 1 && deque_at_back(stacks->b, 0) < lower)
 				stacks_rb(stacks);
+			continue ;
 		}
-		else
-		{
-			stacks_ra(stacks);
-			++rotate_count;
-		}
+		stacks_ra(stacks);
+		++rotate_count;
 	}
 	if (n - push_count != deque_size(stacks->a))
 		repeat_inst(stacks, stacks_rra, rotate_count);
