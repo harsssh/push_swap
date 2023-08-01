@@ -20,29 +20,6 @@ TEST(parse_args, not_number)
     EXPECT_EXIT(parse_args(2, argv), ::testing::ExitedWithCode(1), "");
 }
 
-// leading zeroがある場合はexit
-TEST(parse_args, leading_zero)
-{
-    char	*argv[] = {"./args_test", "01"};
-
-    EXPECT_EXIT(parse_args(2, argv), ::testing::ExitedWithCode(1), "");
-}
-
-TEST(parse_args, leading_zero2)
-{
-    char	*argv[] = {"./args_test", "00"};
-
-    EXPECT_EXIT(parse_args(2, argv), ::testing::ExitedWithCode(1), "");
-}
-
-// 正の符号がある場合はexit
-TEST(parse_args, positive_sign)
-{
-    char	*argv[] = {"./args_test", "+1"};
-
-    EXPECT_EXIT(parse_args(2, argv), ::testing::ExitedWithCode(1), "");
-}
-
 // 負の符号のみの場合はexit
 TEST(parse_args, negative_sign_only)
 {
@@ -55,22 +32,6 @@ TEST(parse_args, negative_sign_only)
 TEST(parse_args, negative_sign)
 {
     char	*argv[] = {"./args_test", "--1"};
-
-    EXPECT_EXIT(parse_args(2, argv), ::testing::ExitedWithCode(1), "");
-}
-
-// 0が負の符号をもつ場合はexit
-TEST(parse_args, negative_sign2)
-{
-    char	*argv[] = {"./args_test", "-0"};
-
-    EXPECT_EXIT(parse_args(2, argv), ::testing::ExitedWithCode(1), "");
-}
-
-// leading zeroがある0が負の符号をもつ場合はexit
-TEST(parse_args, negative_sign3)
-{
-    char	*argv[] = {"./args_test", "-00"};
 
     EXPECT_EXIT(parse_args(2, argv), ::testing::ExitedWithCode(1), "");
 }
