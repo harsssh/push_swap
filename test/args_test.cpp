@@ -86,6 +86,21 @@ TEST(parse_args, one_arg)
     EXPECT_EQ(args[0], 0);
 }
 
+// 特殊色々
+TEST(parse_args, special)
+{
+	char	*argv[] = {"./args_test", "0", "-1", "+2", "0003", "-0004", "+0005"};
+	int		*args;
+
+	args = parse_args(7, argv);
+	EXPECT_EQ(args[0], 0);
+	EXPECT_EQ(args[1], -1);
+	EXPECT_EQ(args[2], 2);
+	EXPECT_EQ(args[3], 3);
+	EXPECT_EQ(args[4], -4);
+	EXPECT_EQ(args[5], 5);
+}
+
 // 引数が2つ
 TEST(parse_args, two_args)
 {

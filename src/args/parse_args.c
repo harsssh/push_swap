@@ -11,15 +11,12 @@
 /* ************************************************************************** */
 
 #include "error/error.h"
-#include "ft_ctype.h"
-#include "ft_string.h"
 #include "libft.h"
 #include "parse_args.h"
 #include <errno.h>
 #include <limits.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 static bool	is_number(char *s)
 {

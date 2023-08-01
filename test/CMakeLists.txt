@@ -9,7 +9,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 link_libraries(ft GTest::gtest GTest::gtest_main)
 
-file(GLOB ARGS_SOURCES ${CMAKE_SOURCE_DIR}/src/args/*.c)
+file(GLOB ARGS_SOURCES ${CMAKE_SOURCE_DIR}/src/args/*.c ${CMAKE_SOURCE_DIR}/src/error/*.c)
 add_executable(args_test args_test.cpp ${ARGS_SOURCES})
 
 file(GLOB DEQUE_SOURCES ${CMAKE_SOURCE_DIR}/src/deque/*.c)
